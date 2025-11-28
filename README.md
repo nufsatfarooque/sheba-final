@@ -1,0 +1,72 @@
+# Sheba Final
+
+> AI Hackathon Project - [Brief Description]
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/sheba-final.git
+cd sheba-final
+
+# Install dependencies
+# [Add installation commands based on your tech stack]
+
+# Run development server
+# [Add run commands]
+```
+
+## 📋 Features
+
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
+
+## 🛠️ Tech Stack
+
+- **Frontend**: [e.g., React, Next.js]
+- **Backend**: [e.g., Node.js, Python, FastAPI]
+- **Database**: [e.g., PostgreSQL, MongoDB]
+- **AI/ML**: [e.g., OpenAI, Hugging Face]
+
+## 📁 Project Structure
+
+```
+sheba-final/
+├── src/              # Source code
+├── public/           # Static assets
+├── docs/             # Documentation
+└── tests/            # Test files
+```
+
+## 🤝 Contributing
+
+We follow professional Git workflow:
+
+1. Create an issue for the feature/bug
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit changes: `git commit -m 'feat: add feature'`
+4. Push to branch: `git push origin feature/your-feature`
+5. Create a Pull Request
+
+See [Conventional Commits](https://www.conventionalcommits.org/) for commit message format.
+
+## 📝 Development Guidelines
+
+- Always work on feature branches
+- Write descriptive commit messages
+- Create PRs for code review
+- Update documentation as you go
+
+## 📄 License
+
+[Specify License]
+
+## 👥 Team
+
+- Team Member 1 - [@github-username]
+- Team Member 2 - [@github-username]
+
+---
+
+Built for [Hackathon Name] 2025
