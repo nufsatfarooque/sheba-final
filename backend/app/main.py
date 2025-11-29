@@ -30,7 +30,7 @@ app.add_middleware(
 # Dummy Endpoint
 @app.get("/")
 async def get_welcome_message():
-   return "DEV Server Audio analytics"
+   return "Pulse - Customer Identity Intelligence and Retention Platform API"
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# SHEBA-Backend
+# Pulse - Backend API
 
 ## Setup Instructions
 
