@@ -7,7 +7,7 @@ import Loading from '../components/Loading'
 
 const Signup = () => {
   const navigate = useNavigate()
-  const { signup, loading, error } = useAuthStore()
+  const { signup, loading, error, clearError } = useAuthStore()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +30,10 @@ const Signup = () => {
         ...prev,
         [name]: '',
       }))
+    }
+    // Clear auth error when user starts typing
+    if (error) {
+      clearError()
     }
   }
 

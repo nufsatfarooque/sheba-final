@@ -29,9 +29,19 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Unauthorized - clear token and redirect to login
-      localStorage.removeItem('token')
-      window.location.href = '/login'
+      // Get the request URL to check if it's an auth endpoint
+      const requestUrl = error.config?.url || ''
+      
+      // Only auto-redirect if it's NOT a login/signup endpoint
+      // This allows login/signup errors to be displayed in the UI
+      if (!requestUrl.includes('/auth/login') && !requestUrl.includes('/auth/signup')) {
+        // Invalid token on protected route - clear token and redirect to login
+        localStorage.removeItem('token')
+        // Use navigate if available, otherwise use window.location
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login'
+        }
+      }
     }
     return Promise.reject(error)
   }
