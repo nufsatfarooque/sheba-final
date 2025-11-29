@@ -39,6 +39,6 @@ Follow these steps to set up and run the backend locally:
    uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
    ```
 
-SWAGGER UI of all APIS: visit `http://localhost:8000/docs`.
+SWAGGER UI of all APIS: visit `http://localhost:5000/docs`.
 
-The API base url will be available at `http://localhost:8000`.
+The API base url will be available at `http://localhost:5000`.
