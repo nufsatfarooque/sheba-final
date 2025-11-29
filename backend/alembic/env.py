@@ -4,6 +4,9 @@ from alembic import context
 from app.db.base import Base  # Import your models here
 from app.core.config import settings
 
+# Import all models here so Alembic can detect them
+from app.db.models.user import User  # noqa
+
 config = context.config
 
 if config.config_file_name is not None:
