@@ -58,7 +58,7 @@ Questions? We're here to help at support@retailgo.io
 Thank you for being awesome!
 RetailGo Team`,
     },
-    sms: 'RetailGo: Congrats! You've earned a free month. Claim your reward: https://t.co/reward456',
+    sms: 'RetailGo: Congrats! You have earned a free month. Claim your reward: https://t.co/reward456',
     revenue: 99,
     churnRisk: 'Medium',
   },
