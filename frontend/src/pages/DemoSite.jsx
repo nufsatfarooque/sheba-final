@@ -22,6 +22,10 @@ export default function DemoSite() {
           }
         }, 100)
       }
+      script.onerror = () => {
+        console.error('Failed to load widget script')
+        setWidgetLoaded(true) // Still show demo even if widget fails
+      }
       document.body.appendChild(script)
     } else {
       window.ShebaWidget.init({
@@ -219,30 +223,30 @@ export default function DemoSite() {
                 minHeight: '300px',
                 backgroundColor: '#f9fafb',
                 borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: 'block',
                 border: '2px dashed #e2e8f0',
                 marginTop: '15px',
+                padding: '20px',
               }}
             >
               {!widgetLoaded && (
-                <div style={{ textAlign: 'center', color: '#94a3b8' }}>
-                  <div style={{ fontSize: '14px', marginBottom: '10px' }}>
-                    Loading SHEBA Widget...
+                <div style={{ textAlign: 'center', color: '#94a3b8', padding: '60px 20px' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '15px' }}>🎁</div>
+                  <div style={{ fontSize: '16px', marginBottom: '10px', fontWeight: 'bold' }}>
+                    SHEBA Widget Demo
                   </div>
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      width: '20px',
-                      height: '20px',
-                      border: '2px solid #e2e8f0',
-                      borderTop: '2px solid #667eea',
-                      borderRadius: '50%',
-                      animation: 'spin 1s linear infinite',
-                    }}
-                  />
-                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                  <div style={{ fontSize: '14px', marginBottom: '20px', color: '#64748b' }}>
+                    Here's where the personalized widget would appear with:
+                  </div>
+                  <ul style={{ fontSize: '13px', color: '#64748b', textAlign: 'left', display: 'inline-block' }}>
+                    <li>Your loyalty score & engagement level</li>
+                    <li>Personalized retention offer</li>
+                    <li>Action button to claim the offer</li>
+                    <li>Tips to maximize your plan</li>
+                  </ul>
+                  <div style={{ marginTop: '20px', fontSize: '12px', color: '#94a3b8' }}>
+                    Widget is loading from: /sheba-widget.js
+                  </div>
                 </div>
               )}
             </div>
