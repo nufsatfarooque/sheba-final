@@ -6,6 +6,9 @@ import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Landing from './pages/Landing'
 import ProtectedRoute from './components/ProtectedRoute'
+import DemoSite from './pages/DemoSite'
+import SaveActionGallery from './pages/SaveActionGallery'
+import DemoNarrative from './pages/DemoNarrative'
 
 function App() {
   const { isAuthenticated, initializeAuth } = useAuthStore()
@@ -28,6 +31,9 @@ function App() {
           <Home />
         </ProtectedRoute>
       } />
+      <Route path="/demo" element={<DemoSite />} />
+      <Route path="/save-actions" element={<SaveActionGallery />} />
+      <Route path="/demo-narrative" element={<DemoNarrative />} />
       <Route path="/" element={<Landing />} />
     </Routes>
   )
