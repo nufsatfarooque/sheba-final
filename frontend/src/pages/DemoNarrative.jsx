@@ -116,10 +116,10 @@ export default function DemoNarrative() {
         {/* Header */}
         <div style={{ marginBottom: '40px', textAlign: 'center' }}>
           <h1 style={{ margin: '0 0 10px 0', fontSize: '32px', color: '#1e293b', fontWeight: 'bold' }}>
-            SHEBA Product Walkthrough
+            Pulse Platform Walkthrough
           </h1>
           <p style={{ margin: '0', color: '#64748b', fontSize: '16px' }}>
-            See how AI-powered churn prediction and retention works in 6 simple steps
+            See how Customer Identity Intelligence & AI-powered retention works in 6 simple steps
           </p>
         </div>
 

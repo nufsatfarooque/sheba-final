@@ -107,10 +107,10 @@ export default function SaveActionGallery() {
         {/* Header */}
         <div style={{ marginBottom: '40px' }}>
           <h1 style={{ margin: '0 0 10px 0', fontSize: '32px', color: '#1e293b', fontWeight: 'bold' }}>
-            Auto-Generated Save Actions
+            Pulse AI-Generated Save Actions
           </h1>
           <p style={{ margin: '0', color: '#64748b', fontSize: '16px' }}>
-            Personalized retention messages for at-risk customers
+            AI-personalized retention messages for at-risk customers
           </p>
         </div>
 
