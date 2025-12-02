@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Landing from './pages/Landing'
+import BehaviorAnalysis from './pages/BehaviorAnalysis'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -26,6 +27,11 @@ function App() {
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <Home />
+        </ProtectedRoute>
+      } />
+      <Route path="/behavior-analysis" element={
+        <ProtectedRoute>
+          <BehaviorAnalysis />
         </ProtectedRoute>
       } />
       <Route path="/" element={<Landing />} />
