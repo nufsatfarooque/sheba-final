@@ -106,6 +106,9 @@ The following tables have been created:
 ### Additional Columns:
 Any other columns in the CSV will be stored in the `metadata` field as JSON.
 
+### Churn Labels:
+**No churn label required in CSV!** The system automatically labels customers as churned based on inactivity threshold (configurable per organization, default: 30 days). See `TRAINING_SCHEMA.md` for details.
+
 ### Example CSV:
 ```csv
 customer_id,event_date,amount,event_type,region,product_category
@@ -129,6 +132,17 @@ The system calculates:
 - **Activity Trend**: Slope of activity over last 30 days
 - **Avg Transaction Value**: Average amount per transaction
 - **Days Between Transactions**: Average gap between activities
+
+## Churn Labeling
+
+**Churn labels are automatically generated** - no label column needed in CSV!
+
+- System uses organization's `churn_threshold_days` (default: 30 days)
+- Customer is labeled as **churned (1)** if inactive for >= threshold days
+- Customer is labeled as **active (0)** if inactive for < threshold days
+- Labels are calculated at training time based on last transaction date
+
+See `TRAINING_SCHEMA.md` for complete details.
 
 ## Model Details
 
