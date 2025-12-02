@@ -56,11 +56,11 @@ class Dataset(Base):
     completed_at = Column(DateTime(timezone=True), nullable=True)
 
     # Relationships
-    customers = relationship("Customer", back_populates="dataset", cascade="all, delete-orphan")
+    customers = relationship("BehaviorCustomer", back_populates="dataset", cascade="all, delete-orphan")
 
 
-class Customer(Base):
-    __tablename__ = "customers"
+class BehaviorCustomer(Base):
+    __tablename__ = "behavior_customers"
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(String, index=True, nullable=False)
@@ -121,7 +121,7 @@ class CustomerBehaviorSummary(Base):
     __tablename__ = "customer_behavior_summaries"
 
     id = Column(Integer, primary_key=True, index=True)
-    customer_id = Column(Integer, ForeignKey("customers.id"), unique=True, nullable=False)
+    customer_id = Column(Integer, ForeignKey("behavior_customers.id"), unique=True, nullable=False)
 
     # Profile summary
     lifecycle_stage = Column(String)  # New, Growing, Mature, Loyal
@@ -153,14 +153,14 @@ class CustomerBehaviorSummary(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Relationships
-    customer = relationship("Customer", back_populates="behavior_summary")
+    customer = relationship("BehaviorCustomer", back_populates="behavior_summary")
 
 
 class Intervention(Base):
     __tablename__ = "interventions"
 
     id = Column(Integer, primary_key=True, index=True)
-    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
+    customer_id = Column(Integer, ForeignKey("behavior_customers.id"), nullable=False)
 
     # Intervention details
     treatment_id = Column(String, nullable=False)  # discount_15pct, vip_support, etc.
@@ -201,4 +201,4 @@ class Intervention(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Relationships
-    customer = relationship("Customer", back_populates="interventions")
+    customer = relationship("BehaviorCustomer", back_populates="interventions")

@@ -44,9 +44,9 @@ def upgrade():
     )
     op.create_index(op.f('ix_datasets_dataset_id'), 'datasets', ['dataset_id'], unique=True)
 
-    # Create customers table
+    # Create behavior_customers table
     op.create_table(
-        'customers',
+        'behavior_customers',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('customer_id', sa.String(), nullable=False),
         sa.Column('dataset_id', sa.Integer(), nullable=False),
@@ -82,7 +82,7 @@ def upgrade():
         sa.ForeignKeyConstraint(['dataset_id'], ['datasets.id'], ),
         sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_customers_customer_id'), 'customers', ['customer_id'], unique=False)
+    op.create_index(op.f('ix_behavior_customers_customer_id'), 'behavior_customers', ['customer_id'], unique=False)
 
     # Create customer_behavior_summaries table
     op.create_table(
@@ -106,7 +106,7 @@ def upgrade():
         sa.Column('summary_text', sa.String(), nullable=True),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
         sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-        sa.ForeignKeyConstraint(['customer_id'], ['customers.id'], ),
+        sa.ForeignKeyConstraint(['customer_id'], ['behavior_customers.id'], ),
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('customer_id')
     )
@@ -138,7 +138,7 @@ def upgrade():
         sa.Column('ab_test_variant', sa.String(), nullable=True),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
         sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-        sa.ForeignKeyConstraint(['customer_id'], ['customers.id'], ),
+        sa.ForeignKeyConstraint(['customer_id'], ['behavior_customers.id'], ),
         sa.PrimaryKeyConstraint('id')
     )
 
@@ -146,8 +146,8 @@ def upgrade():
 def downgrade():
     op.drop_table('interventions')
     op.drop_table('customer_behavior_summaries')
-    op.drop_index(op.f('ix_customers_customer_id'), table_name='customers')
-    op.drop_table('customers')
+    op.drop_index(op.f('ix_behavior_customers_customer_id'), table_name='behavior_customers')
+    op.drop_table('behavior_customers')
     op.drop_index(op.f('ix_datasets_dataset_id'), table_name='datasets')
     op.drop_table('datasets')
 

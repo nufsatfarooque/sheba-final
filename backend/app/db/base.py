@@ -7,4 +7,4 @@ from app.db.models.customer_feature import CustomerFeature
 from app.db.models.churn_prediction import ChurnPrediction
 from app.db.models.model_metadata import ModelMetadata
 from app.db.models.data_processing_status import DataProcessingStatus
-from app.db.models.behavior.dataset import Dataset, Customer, CustomerBehaviorSummary, Intervention
+from app.db.models.behavior.dataset import Dataset, BehaviorCustomer, CustomerBehaviorSummary, Intervention

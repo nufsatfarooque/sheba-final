@@ -13,7 +13,7 @@ import shutil
 from app.api.deps import get_db, get_current_user
 from app.schemas.behavior import *
 from app.db.models.user import User
-from app.db.models.behavior.dataset import Dataset, Customer, CustomerBehaviorSummary
+from app.db.models.behavior.dataset import Dataset, BehaviorCustomer, CustomerBehaviorSummary
 from app.services.behavior_analysis.data_ingestion import DataIngestionService
 from app.services.behavior_analysis.churn_scoring import ChurnScoringEngine
 from app.services.behavior_analysis.uplift_model import UpliftModelingEngine, InterventionOptimizer
@@ -196,19 +196,19 @@ async def get_churn_risk(
         raise HTTPException(status_code=404, detail="Dataset not found")
 
     # Build query
-    query = db.query(Customer).filter(Customer.dataset_id == dataset.id)
+    query = db.query(BehaviorCustomer).filter(BehaviorCustomer.dataset_id == dataset.id)
 
     if request.customer_ids:
-        query = query.filter(Customer.customer_id.in_(request.customer_ids))
+        query = query.filter(BehaviorCustomer.customer_id.in_(request.customer_ids))
 
     if request.segment:
-        query = query.filter(Customer.customer_segment == request.segment)
+        query = query.filter(BehaviorCustomer.customer_segment == request.segment)
 
     if request.min_risk_score is not None:
-        query = query.filter(Customer.churn_risk_score >= request.min_risk_score)
+        query = query.filter(BehaviorCustomer.churn_risk_score >= request.min_risk_score)
 
     if request.max_risk_score is not None:
-        query = query.filter(Customer.churn_risk_score <= request.max_risk_score)
+        query = query.filter(BehaviorCustomer.churn_risk_score <= request.max_risk_score)
 
     # Get total count
     total_count = query.count()
@@ -258,9 +258,9 @@ async def get_customer_behavior(
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
-    customer = db.query(Customer).filter(
-        Customer.dataset_id == dataset.id,
-        Customer.customer_id == customer_id
+    customer = db.query(BehaviorCustomer).filter(
+        BehaviorCustomer.dataset_id == dataset.id,
+        BehaviorCustomer.customer_id == customer_id
     ).first()
 
     if not customer:
@@ -336,10 +336,10 @@ async def recommend_interventions(
         raise HTTPException(status_code=404, detail="Dataset not found")
 
     # Get customers
-    query = db.query(Customer).filter(Customer.dataset_id == dataset.id)
+    query = db.query(BehaviorCustomer).filter(BehaviorCustomer.dataset_id == dataset.id)
 
     if request.customer_ids:
-        query = query.filter(Customer.customer_id.in_(request.customer_ids))
+        query = query.filter(BehaviorCustomer.customer_id.in_(request.customer_ids))
 
     customers = query.all()
 
@@ -443,7 +443,7 @@ async def get_dataset_stats(
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
-    customers = db.query(Customer).filter(Customer.dataset_id == dataset.id).all()
+    customers = db.query(BehaviorCustomer).filter(BehaviorCustomer.dataset_id == dataset.id).all()
 
     if not customers:
         raise HTTPException(status_code=404, detail="No customers in dataset")

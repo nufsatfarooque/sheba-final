@@ -16,7 +16,7 @@ from app.services.behavior_analysis.schema_mapper import SchemaMapper
 from app.services.behavior_analysis.churn_scoring import ChurnScoringEngine
 from app.services.behavior_analysis.uplift_model import UpliftModelingEngine
 from app.services.behavior_analysis.behavior_analyzer import CustomerBehaviorAnalyzer
-from app.db.models.behavior.dataset import Dataset, Customer, CustomerBehaviorSummary, DatasetType, DatasetStatus
+from app.db.models.behavior.dataset import Dataset, BehaviorCustomer, CustomerBehaviorSummary, DatasetType, DatasetStatus
 
 logger = logging.getLogger(__name__)
 
@@ -177,7 +177,7 @@ class DataIngestionService:
         customers = []
 
         for idx, row in normalized_df.iterrows():
-            customer = Customer(
+            customer = BehaviorCustomer(
                 customer_id=str(row['customer_id']),
                 dataset_id=dataset_id,
                 treatment=int(row['treatment']),
@@ -248,8 +248,8 @@ class DataIngestionService:
         """Generate behavior summaries for all customers"""
         try:
             # Get customer records from database
-            customers = self.db.query(Customer).filter(
-                Customer.dataset_id == dataset_id
+            customers = self.db.query(BehaviorCustomer).filter(
+                BehaviorCustomer.dataset_id == dataset_id
             ).all()
 
             # Calculate churn scores
